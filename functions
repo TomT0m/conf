@@ -33,7 +33,6 @@ function for_all_input_files() {
         cd "$CONF_FILES_DIR/"
         while read fichier ; do
 		if ! is_metadata "$fichier"; then
-			echo "========== $fichier">&2
                 	$command "$fichier"
 		fi
         done
@@ -46,7 +45,6 @@ function for_all_conffiles() {
 	cd "$CONF_FILES_DIR/"
 	for fichier in $(find) ; do 
 		if ! is_metadata "$fichier"; then
-			echo "========== $fichier">&2
 			$command "$fichier"
 		fi
 	done

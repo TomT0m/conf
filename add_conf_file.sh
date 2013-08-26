@@ -22,6 +22,8 @@ list="$(for fichier in $@ ; do
 done)"
 echo "$list" | for_all_input_files backup
 
+cd "$CONF_FILES_DIR"
+
 git commit -m "$(echo -e "$(date) : \n added files to config : \n $list")"
 git push
 
