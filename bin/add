@@ -3,7 +3,9 @@
 
 #Description: add the parameter to the conf repo
 
-import os
+import os, subprocess
+
+_bin_path = os.path.expanduser("~/conf")
 
 def main(files):
 	
@@ -12,7 +14,7 @@ def main(files):
 		homedir = os.path.expanduser("~")
 
 		if homedir in path:
-			
+			subprocess.check_output(["{}/add_conf_file".format(_bin_path), path], cwd = homedir)
 		else:
 			print("not done :{}, reason {}", filename, "not in home directory")
 
