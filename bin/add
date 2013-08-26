@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+
+
+#Description: add the parameter to the conf repo
+
+import os
+
+def main(files):
+	
+	for filename in files:
+		path = os.path.realpath(filename)
+		homedir = os.path.expanduser("~")
+
+		if homedir in path:
+			
+		else:
+			print("not done :{}, reason {}", filename, "not in home directory")
+
+
+if __name__ == "__main__":
+	main(file[1:])
+
