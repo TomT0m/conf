@@ -34,9 +34,6 @@ function link_conf {
 # getting filename that will be erased to backup them later
 cd "$CONF_FILES_DIR"
 new_conf_files="$( git ls-files )"
-cd ..
-
-
 
 backup_branch="$(hostname)-$(whoami)"
 if ! branch_exists "$backup_branch"; then
@@ -51,16 +48,14 @@ git ls-files | for_all_input_files backup
 # copy current version of new file list
 echo -n "$new_conf_files" | for_all_input_files backup
 
-
 ##### init conf #####
-git checkout master install.sh
+# git checkout master install.sh
 git commit -am "Backup commit : $(date)"
 
 git checkout master
 
 git submodule init
 git submodule update
-
 
 # install new files
 for_all_conffiles link_conf

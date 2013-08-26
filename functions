@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONF_FILES_DIR=conf_files
+CONF_FILES_DIR=~/conf/conf_files
 
 function backup() {
 	local fic="$1"
@@ -14,12 +14,28 @@ function backup() {
 	fi
 }
 
+
+function is_metadata() {
+	local filename="$1"
+	if [[ "$filename" == ./.git/* || \
+	       	 "$filename" == "./.git"  || \
+	       	 "$filename" == "./.gitignore"  || \
+	       	 "$filename" == "./.gitmodules"  || \
+	       	 "$filename" == "./README.md" ]] ; then
+		return 0
+	fi
+	return 1
+
+}
 function for_all_input_files() {
         command=$1
         pushd . >/dev/null
         cd "$CONF_FILES_DIR/"
         while read fichier ; do
-                $command "$fichier"
+		if ! is_metadata "$fichier"; then
+			echo "========== $fichier">&2
+                	$command "$fichier"
+		fi
         done
         popd . >/dev/null
 }
@@ -29,7 +45,10 @@ function for_all_conffiles() {
 	pushd . > /dev/null
 	cd "$CONF_FILES_DIR/"
 	for fichier in $(find) ; do 
-		$command "$fichier"
+		if ! is_metadata "$fichier"; then
+			echo "========== $fichier">&2
+			$command "$fichier"
+		fi
 	done
 	popd > /dev/null
 }
