@@ -14,7 +14,9 @@ function branch_exists(){
 }
 
 
-
+if [ -f "$base/bin/commands" ] ; then 
+	cp $base/bin/commands ~/bin/commands
+fi
 
 function link_conf {
 	# f
@@ -30,7 +32,7 @@ function link_conf {
 }
 
 # getting filename that will be erased to backup them later
-cd files
+cd "$CONF_FILES_DIR"
 new_conf_files="$( git ls-files )"
 cd ..
 

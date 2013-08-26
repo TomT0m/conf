@@ -1,5 +1,6 @@
 #!/bin/bash
 
+CONF_FILES_DIR=conf_files
 
 function backup() {
 	local fic="$1"
@@ -16,7 +17,7 @@ function backup() {
 function for_all_input_files() {
         command=$1
         pushd . >/dev/null
-        cd files/
+        cd "$CONF_FILES_DIR/"
         while read fichier ; do
                 $command "$fichier"
         done
@@ -26,7 +27,7 @@ function for_all_input_files() {
 function for_all_conffiles() {
 	local command=$1
 	pushd . > /dev/null
-	cd files/
+	cd "$CONF_FILES_DIR/"
 	for fichier in $(find) ; do 
 		$command "$fichier"
 	done
