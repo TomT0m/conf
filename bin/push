@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#Description: moves changes to repo
+
+~/conf/update_conf_repo.sh
+

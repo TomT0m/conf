@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#Description: check if tracked files have been edited
+
+~/conf/up_to_date.sh
+
