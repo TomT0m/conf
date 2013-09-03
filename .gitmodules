@@ -4,3 +4,6 @@
 [submodule "files/src/liquidprompt"]
 	path = files/src/liquidprompt
 	url = https://github.com/nojhan/liquidprompt
+[submodule "conf_files"]
+	path = conf_files
+	url = https://github.com/TomT0m/conf_files
