@@ -1,3 +1,4 @@
 *.swp
 conf_files/*
+conf_files/
 
