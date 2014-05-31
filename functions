@@ -40,7 +40,7 @@ function for_all_input_files() {
 }
 
 function for_all_conffiles() {
-	local command=$1
+	local command="$1"
 	pushd . > /dev/null
 	cd "$CONF_FILES_DIR/"
 	for fichier in $(find) ; do 
@@ -49,4 +49,41 @@ function for_all_conffiles() {
 		fi
 	done
 	popd > /dev/null
+}
+
+function branch_exists(){
+	git show-ref --verify --quiet "refs/heads/$1"
+	return $?
+}
+function get_backup_branch_name() {
+	echo "$(echo "$(hostname)-$(whoami)")"
+}
+function exec_in_backup_branch(){
+	local command="$1"
+	pushd .
+	cd "$CONF_FILES_DIR"
+	local backup_branch="$(get_backup_branch_name)"
+
+	if ! branch_exists "$backup_branch"; then
+		echo "creating branch $backup_branch ..."
+		git checkout -b "$backup_branch" 
+	else
+		git checkout "$backup_branch"
+	fi
+
+	$command
+	
+	popd 
+}
+
+function exec_in_master_branch(){
+	local command="$1"
+	pushd .
+	cd "$CONF_FILES_DIR"
+
+	git checkout master 
+
+	$command
+	
+	popd 
 }

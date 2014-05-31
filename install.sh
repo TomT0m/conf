@@ -4,14 +4,10 @@
 
 
 base="$(dirname $0)"
-cd $base
+cd "$base"
 
 source functions
 
-function branch_exists(){
-	git show-ref --verify --quiet "refs/heads/$1"
-	return $?
-}
 
 
 if [ -f "$base/bin/commands" ] ; then 
@@ -32,31 +28,30 @@ function link_conf {
 }
 
 # getting filename that will be erased to backup them later
-cd "$CONF_FILES_DIR"
-new_conf_files="$( git ls-files )"
 
-backup_branch="$(hostname)-$(whoami)"
-if ! branch_exists "$backup_branch"; then
-	git checkout -b "$backup_branch" 
-else
-	git checkout "$backup_branch"
-fi
+function backup_local_conf() {
 
-# copy current version of old backups file list
-git ls-files | for_all_input_files backup
+	# copy current version of old backups file list
+	git ls-files | for_all_input_files backup
 
-# copy current version of new file list
-echo -n "$new_conf_files" | for_all_input_files backup
+	# copy current version of new file list
+	echo -n "$new_conf_files" | for_all_input_files backup
+}
+
+exec_in_backup_branch backup_local_conf
 
 ##### init conf #####
-# git checkout master install.sh
-git commit -am "Backup commit : $(date)"
+function init_conf(){
+	git commit -am "Backup commit : $(date)"
 
-git checkout master
+	git checkout master
 
-git submodule init
-git submodule update
+	git submodule init
+	git submodule update
 
-# install new files
-for_all_conffiles link_conf
+	# install new files
+	for_all_conffiles link_conf
+}
+
+exec_in_master_branch init_conf
 
