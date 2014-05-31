@@ -36,7 +36,7 @@ function for_all_input_files() {
                 	$command "$fichier"
 		fi
         done
-        popd . >/dev/null
+        popd >/dev/null
 }
 
 function for_all_conffiles() {
@@ -60,7 +60,7 @@ function get_backup_branch_name() {
 }
 function exec_in_backup_branch(){
 	local command="$1"
-	pushd .
+	pushd . >/dev/null
 	cd "$CONF_FILES_DIR"
 	local backup_branch="$(get_backup_branch_name)"
 
@@ -73,17 +73,17 @@ function exec_in_backup_branch(){
 
 	$command
 	
-	popd 
+	popd >/dev/null
 }
 
 function exec_in_master_branch(){
 	local command="$1"
-	pushd .
+	pushd . >/dev/null
 	cd "$CONF_FILES_DIR"
 
 	git checkout master 
 
 	$command
 	
-	popd 
+	popd >/dev/null
 }
