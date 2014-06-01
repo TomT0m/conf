@@ -32,3 +32,5 @@ function master_update() {
 	git push
 }
 
+exec_in_master_branch master_update
+
