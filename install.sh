@@ -10,6 +10,9 @@ source lib
 
 # init
 
+if [ -f "$base/bin/commands" ] ; then 
+	cp $base/bin/commands ~/bin/commands
+fi
 
 if [ -f "$default_config_path/conf/conf" ] ; then 
 	source "$default_config_path/conf/conf"
@@ -18,23 +21,18 @@ else
 	echo "non initialized config"
 	remote_repo="${default_conf_files_repo}"
 	echo "default repo : ${remote_repo}"
-	read -p "change it? (y/N)" -n 1 choice
-	
+	read "change it? (y/N)" -n 1 choice
+
 	case "$choice" in 
   		y|Y ) read "enter new repo name" remote_repo ;;
   		* )   echo "using default" ;;
 	esac
-		
+	
 	mkdir -p "$default_config_path/conf/"
-	# mkdir -p "${default_config_file_store_dir}"
-	git clone "$remote_repo"
+	mkdir -p conf_file
 	
 	echo 'remote_repo='\"${remote_repo}\" > $default_config_path/conf/conf
 	echo 'CONF_FILES_DIR="'"${CONF_FILES_DIR}"'"' >> $default_config_path/conf/conf
-fi
-
-if [ -f "${CONF_FILES_DIR}/bin/commands" ] ; then 
-	cp "${CONF_FILES_DIR}/bin/commands" ~/bin/commands
 fi
 
 # local functions
