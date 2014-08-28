@@ -21,7 +21,7 @@ else
 	echo "non initialized config"
 	remote_repo="${default_conf_files_repo}"
 	echo "default repo : ${remote_repo}"
-	read "change it? (y/N)" -n 1 choice
+	read "change it? (y/N)" -r 1 choice
 
 	case "$choice" in 
   		y|Y ) read "enter new repo name" remote_repo ;;
