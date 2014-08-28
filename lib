@@ -3,7 +3,10 @@
 if [ -f ./defaults ] ; then
 	source ./defaults
 elif [ -f "$HOME/conf/defaults" ] ; then
+<<<<<<< HEAD
 	 #source $HOME/.config/conf/conf
+=======
+>>>>>>> master
 	source "$HOME/conf/defaults"
 else
 	echo "can't load lib"
