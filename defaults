@@ -1,6 +1,6 @@
 
 default_conf_files_repo="git@github.com:TomT0m/conf_files.git"
 default_config_path=${XDG_CONFIG_HOME:-$HOME/.config}
-default_base="$(pwd)"
+default_base="$HOME/conf"
 default_config_files_store_dir="${default_base}/conf_files"
 
