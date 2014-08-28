@@ -2,7 +2,11 @@
 
 source ./defaults
 
-CONF_FILES_DIR=${CONF_FILES_DIR:-$default_config_files_store_dir}
+if [ -f "$default_config_path" ] ; then
+	source "$default_config_path"
+else
+	CONF_FILES_DIR="$default_config_files_store_dir"
+fi
 
 function backup() {
 	local fic="$1"
