@@ -29,7 +29,7 @@ else
 	esac
 	
 	mkdir -p "$default_config_path/conf/"
-	mkdir -p conf_file
+	mkdir -p "${default_config_file_store_dir}"
 	
 	echo 'remote_repo='\"${remote_repo}\" > $default_config_path/conf/conf
 	echo 'CONF_FILES_DIR="'"${CONF_FILES_DIR}"'"' >> $default_config_path/conf/conf
