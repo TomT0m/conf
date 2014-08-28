@@ -19,14 +19,15 @@ else
 	remote_repo="${default_conf_files_repo}"
 	echo "default repo : ${remote_repo}"
 	read "change it? (y/N)" -r 1 choice
-
+	
 	case "$choice" in 
   		y|Y ) read "enter new repo name" remote_repo ;;
   		* )   echo "using default" ;;
 	esac
-	
+		
 	mkdir -p "$default_config_path/conf/"
-	mkdir -p "${default_config_file_store_dir}"
+	# mkdir -p "${default_config_file_store_dir}"
+	git clone "$remote_repo"
 	
 	echo 'remote_repo='\"${remote_repo}\" > $default_config_path/conf/conf
 	echo 'CONF_FILES_DIR="'"${CONF_FILES_DIR}"'"' >> $default_config_path/conf/conf
