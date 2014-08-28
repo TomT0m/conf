@@ -2,7 +2,7 @@
 
 source defaults
 
-CONF_FILES_DIR=${CONF_FILES_DIR:-default_confg_files_store_dir}
+CONF_FILES_DIR=${CONF_FILES_DIR:-$default_confg_files_store_dir}
 
 function backup() {
 	local fic="$1"
