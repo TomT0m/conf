@@ -10,9 +10,6 @@ source lib
 
 # init
 
-if [ -f "$base/bin/commands" ] ; then 
-	cp $base/bin/commands ~/bin/commands
-fi
 
 if [ -f "$default_config_path/conf/conf" ] ; then 
 	source "$default_config_path/conf/conf"
@@ -33,6 +30,10 @@ else
 	
 	echo 'remote_repo='\"${remote_repo}\" > $default_config_path/conf/conf
 	echo 'CONF_FILES_DIR="'"${CONF_FILES_DIR}"'"' >> $default_config_path/conf/conf
+fi
+
+if [ -f "${CONF_FILES_DIR}/bin/commands" ] ; then 
+	cp "${CONF_FILES_DIR}/bin/commands" ~/bin/commands
 fi
 
 # local functions
