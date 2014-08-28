@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source ./defaults
+if [ -f ./defaults ] ; then
+	source ./defaults
+elif [ -f "$HOME/conf/defaults" ] ; then
+	source "$HOME/conf/defaults"
+else
+	echo "can't load lib"
+	exit 1
+fi
 
 if [ -f "$default_config_path" ] ; then
 	source "$default_config_path"
