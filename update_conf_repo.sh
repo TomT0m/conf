@@ -5,7 +5,7 @@
 name="$0"
 rep="$(dirname $0)"
 
-. "$rep/functions"
+. "$rep/lib"
 
 # backup branch of local computer
 

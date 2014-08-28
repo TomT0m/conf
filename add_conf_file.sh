@@ -4,7 +4,7 @@
 
 rep="$(dirname $0)"
 
-. "$rep/functions"
+. "$rep/lib"
 
 
 # must be used in home directory 

@@ -4,7 +4,7 @@
 
 cd "$(dirname $0)"
 
-source functions
+source lib
 
 function up_to_date_file () {
 	#echo $1 >&2
